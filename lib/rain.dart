@@ -13,12 +13,66 @@ ParticleOptions particleOptions = ParticleOptions(
   opacityChangeRate: 0.25,
   minOpacity: 0.1,
   maxOpacity: 0.4,
-  spawnMinSpeed: 30.0,
+  spawnMinSpeed: 50.0,
   spawnMaxSpeed: 70.0,
   spawnMinRadius: 7.0,
   spawnMaxRadius: 15.0,
-  particleCount: 40,
+  particleCount: random.nextInt(4) + 1,
+  // particleCount: 3,
 );
+
+class ShootingStarsBehaviour extends RacingLinesBehaviour {
+  ShootingStarsBehaviour({
+    super.direction = LineDirection.Ltr,
+    int numLines = 2,
+  }) : assert(numLines >= 0) {
+    _numLines = numLines;
+  }
+  int? _numLines;
+  @override
+  int? get numLines => _numLines;
+  // @override
+  // List<Line> generateLines(int numLines) => List<Line>.generate(numLines, (i) {
+  //       final Line line = Line();
+  //       initLine(line);
+  //       return line;
+  //     });
+  @override
+  List<Line> generateLines(int numLines) => List<Line>.generate(numLines, (i) {
+        final Line line = Line();
+        initLine(line);
+        return line;
+      });
+
+  @override
+  void initLine(Line line) {
+    line.speed = random.nextDouble() * 300 + 300;
+    // line.speed = random.nextDouble() * 400 + 200;
+
+    final bool axisHorizontal =
+        (direction == LineDirection.Ltr || direction == LineDirection.Rtl);
+    final bool normalDirection =
+        (direction == LineDirection.Ltr || direction == LineDirection.Ttb);
+    final double sizeCrossAxis = axisHorizontal ? size!.height : size!.width;
+    final double sizeMainAxis = axisHorizontal ? size!.width : size!.height;
+    final double spawnCrossAxis = random.nextInt(100) * (sizeCrossAxis / 100);
+    double spawnMainAxis = 0.0;
+
+    if (line.position == null) {
+      spawnMainAxis = random.nextDouble() * sizeMainAxis;
+    } else {
+      spawnMainAxis = normalDirection
+          ? (-line.speed / 2.0)
+          : (sizeMainAxis + line.speed / 2.0);
+    }
+
+    line.position = axisHorizontal
+        ? Offset(spawnMainAxis, spawnCrossAxis)
+        : Offset(spawnCrossAxis, spawnMainAxis);
+    line.thickness = random.nextInt(2) + 2;
+    line.color = Colors.white;
+  }
+}
 
 // Paint
 var particlePaint = Paint()
@@ -33,12 +87,14 @@ Behaviour randomParticleBehaviour = RandomParticleBehaviour(
 
 // Lines
 var lineDirection = LineDirection.Rtl;
-// int lineCount = 1;
-int lineCount = random.nextInt(4) + 1;
+// int lineCount = particleOptions.particleCount;
+int lineCount = random.nextInt(2) + 1;
 
 // Racing Lines Behaviour
-Behaviour racingLinesBehaviour =
-    RacingLinesBehaviour(direction: lineDirection, numLines: lineCount);
+Behaviour shootingStarBehaviour = ShootingStarsBehaviour(
+  numLines: lineCount,
+  direction: lineDirection,
+);
 
 // Bubbles
 BubbleOptions _bubbleOptions = const BubbleOptions();

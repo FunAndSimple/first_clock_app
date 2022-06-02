@@ -1,8 +1,10 @@
-import 'package:animated_background/animated_background.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:first_clock_app/rain.dart';
 import 'package:flutter/material.dart';
-import 'data.dart';
+import 'themes.dart';
+import 'package:animated_background/animated_background.dart';
+import 'rain.dart';
+import 'enums.dart';
+import 'alarm_card.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,81 +18,186 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     double oldHeight = MediaQuery.of(context).size.height;
     var padding = MediaQuery.of(context).padding;
     double height = oldHeight - padding.top - padding.bottom;
-
-    // ParticleType? _particleType = ParticleType.Image;
+    // Color bgColor = const Color(0xFF0E0B13);
+    // Color bgColor = const Color(0xFFC29675);
+    bool isSwitched = false;
 
     return Scaffold(
-        //   body: AnimatedBackground(
-        //   behaviour: RainParticleBehaviour(),
-        //   vsync: this,
-        //   child: const Text('Hello'),
-        // ));
-
-        body: Stack(children: [
-      Container(
-        decoration: bgGrad,
-      ),
-      AnimatedBackground(
-        behaviour: racingLinesBehaviour,
-        vsync: this,
-        child: const Text('Hello'),
-      ),
-      Column(
-        mainAxisSize: MainAxisSize.max,
+      // body: SafeArea(
+      //   top: true,
+      //   bottom: false,
+      //   child: Stack(
+      body: Stack(
         children: [
+          // Background ======================================
+
+          AnimatedBackground(
+            behaviour: shootingStarBehaviour,
+            vsync: this,
+            child: Stack(
+              children: [
+                Container(decoration: CustomTheme.bgDark),
+                // Container(decoration: CustomTheme.bgLight),
+                Container(
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('assets/images/random_stars.png'),
+                        fit: BoxFit.cover),
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.bottomLeft,
+                  padding: const EdgeInsets.only(left: 10, bottom: 10),
+                  child: const Image(
+                    image: AssetImage('assets/images/gemini_outline.png'),
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.bottomLeft,
+                  padding: const EdgeInsets.only(left: 10, bottom: 10),
+                  child: const Image(
+                    image: AssetImage('assets/images/gemini.png'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // Background ======================================
+
           SizedBox(
-              width: 200,
-              height: 100,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
-                children: const [
-                  Text('12:00'),
-                  Text('AM'),
+            width: width,
+            height: height,
+            child: Padding(
+              padding: EdgeInsets.only(top: padding.top),
+              child: Column(
+                children: [
+                  // Top part ========================================
+                  Flexible(
+                    flex: 1,
+                    fit: FlexFit.tight,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Wrap(
+                            // flex: 3,
+                            // fit: FlexFit.loose,
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(10, 0, 30, 0),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.baseline,
+                                      textBaseline: TextBaseline.alphabetic,
+                                      children: [
+                                        Text(
+                                          '12:00',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline1,
+                                        ),
+                                        Text(
+                                          'AM',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline2,
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ]),
+                        Expanded(
+                          // flex: 1,
+                          child: Container(
+                            alignment: Alignment.center,
+                            child: Stack(
+                              children: const [
+                                Opacity(
+                                  opacity: 0.6,
+                                  child: Image(
+                                    alignment: Alignment.center,
+                                    image: AssetImage(
+                                      'assets/images/Cloud.png',
+                                    ),
+                                    colorBlendMode: BlendMode.darken,
+                                    fit: BoxFit.cover,
+                                    // width: 100,
+                                  ),
+                                ),
+                                Image(
+                                  image: AssetImage(
+                                    'assets/images/Moon.png',
+                                  ),
+                                  width: 100,
+                                  fit: BoxFit.cover,
+                                  color: Colors.white,
+                                ),
+                                // Image(
+                                //   image: AssetImage(
+                                //     'assets/images/Sun.png',
+                                //   ),
+                                //   width: 100,
+                                //   fit: BoxFit.cover,
+                                // ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // const SizedBox(
+                  //   height: 15,
+                  // ),
+                  // End of top part =================================
+                  // Bottom part ========================================
+                  Flexible(
+                    flex: 9,
+                    fit: FlexFit.tight,
+                    child: Container(
+                      width: width,
+                      color: Colors.redAccent.withOpacity(0.3),
+                      // color: Colors.transparent,
+                      child: ListView(
+                        children: [
+                          alarm_card.buildCard(),
+                          buildCard(),
+                          buildCard(),
+                          buildCard(),
+                          buildCard(),
+                          buildCard(),
+                          buildCard(),
+                          buildCard(),
+                        ],
+                      ),
+                    ),
+                  ),
+                  // End of bottom part =================================
                 ],
-              )),
-          Container(
-            alignment: Alignment.centerRight,
-            padding: const EdgeInsets.fromLTRB(32, 0, 0, 0),
-            width: width * 0.9,
-            height: height * 0.1,
-            decoration: alarmGrad,
-            child: ,
+              ),
+            ),
           ),
         ],
       ),
-      Align(
-        alignment: Alignment.bottomCenter,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, 100),
-          child: ElevatedButton(
-            onPressed: () {},
-            child: const Icon(
-              Icons.add_box_rounded,
-              size: 100,
-            ),
-          ),
-        ),
+
+      bottomNavigationBar: CurvedNavigationBar(
+        height: 60,
+        animationDuration: const Duration(milliseconds: 200),
+        backgroundColor: Colors.grey,
+        items: const [
+          Icon(Icons.alarm, size: 30),
+          Icon(Icons.watch_later_outlined, size: 30),
+          Icon(Icons.timer, size: 30),
+          Icon(Icons.bed, size: 30),
+        ],
+        onTap: (index) {},
       ),
-      Align(
-        alignment: Alignment.bottomCenter,
-        child: Theme(
-          data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
-          child: CurvedNavigationBar(
-            buttonBackgroundColor: Colors.white.withOpacity(0.7),
-            backgroundColor: Colors.grey.withOpacity(0.3),
-            color: Colors.white.withOpacity(0.6),
-            items: const [
-              Icon(Icons.alarm, size: 30),
-              Icon(Icons.watch_later_outlined, size: 30),
-              Icon(Icons.timer, size: 30),
-              Icon(Icons.bed, size: 30),
-            ],
-            onTap: (index) {},
-            animationDuration: const Duration(milliseconds: 300),
-          ),
-        ),
-      ),
-    ]));
+    );
   }
+
+  
 }
