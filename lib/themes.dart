@@ -10,31 +10,7 @@ class CustomTheme with ChangeNotifier {
     _isDarkTheme = !_isDarkTheme;
     notifyListeners();
   }
-
-  static Decoration get bgLight {
-    return const BoxDecoration(
-      image: DecorationImage(
-          image: AssetImage('assets/images/bgLight.png'), fit: BoxFit.cover),
-    );
-  }
-
-  static Decoration get bgDark {
-    return const BoxDecoration(
-        gradient: LinearGradient(
-      begin: Alignment.topCenter,
-      end: Alignment.bottomCenter,
-      // stops: [0.0, 0.4, 1],
-      stops: [0.0, 1],
-      colors: [
-        // Color(0xFF050917),
-        // Color(0xFF382C4D),
-        // Color(0xFFC29675),
-        Color(0xFF1E0B47),
-        Color(0xFF372A25),
-      ],
-    ));
-  }
-
+  
   static Decoration get cardGrad {
     return const BoxDecoration(
       backgroundBlendMode: BlendMode.screen,
@@ -100,7 +76,7 @@ class CustomTheme with ChangeNotifier {
           fontFamily: 'SF Pro Display'),
       headline2: TextStyle(
           color: darkTextColor,
-          fontSize: 36,
+          fontSize: 30,
           fontWeight: FontWeight.w900,
           fontFamily: 'SF Pro Display'),
       bodyText1: TextStyle(

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'themes.dart';
 import 'package:animated_background/animated_background.dart';
 import 'rain.dart';
+// import 'alarm_card.dart';
 import 'enums.dart';
-import 'alarm_card.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -36,7 +36,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             vsync: this,
             child: Stack(
               children: [
-                Container(decoration: CustomTheme.bgDark),
+                Container(
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('assets/images/bgDark.png'),
+                        fit: BoxFit.cover),
+                  ),
+                ),
                 // Container(decoration: CustomTheme.bgLight),
                 Container(
                   decoration: const BoxDecoration(
@@ -72,111 +78,115 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               child: Column(
                 children: [
                   // Top part ========================================
-                  Flexible(
-                    flex: 1,
-                    fit: FlexFit.tight,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Wrap(
-                            // flex: 3,
-                            // fit: FlexFit.loose,
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(10, 0, 30, 0),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.baseline,
-                                      textBaseline: TextBaseline.alphabetic,
-                                      children: [
-                                        Text(
-                                          '12:00',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline1,
-                                        ),
-                                        Text(
-                                          'AM',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline2,
-                                        ),
-                                      ],
-                                    )
-                                  ],
+                  Wrap(
+                    // flex: 1,
+                    // fit: FlexFit.loose,
+                    children: [
+                      Row(
+                        // color: Colors.red,
+                        // padding: const EdgeInsets.only(left: 5),
+                        // direction: Axis.horizontal,
+                        // crossAxisAlignment:
+                        //     CrossAxisAlignment.baseline,
+                        // textBaseline: TextBaseline.alphabetic,
+                        children: [
+                          Flexible(
+                            flex: 24,
+                            child: Text(
+                              '12:00',
+                              style: Theme.of(context).textTheme.headline1,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Flexible(
+                            flex: 16,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Monday',
+                                  style: Theme.of(context).textTheme.headline2,
                                 ),
-                              ),
-                            ]),
-                        Expanded(
-                          // flex: 1,
-                          child: Container(
-                            alignment: Alignment.center,
-                            child: Stack(
-                              children: const [
-                                Opacity(
-                                  opacity: 0.6,
-                                  child: Image(
-                                    alignment: Alignment.center,
-                                    image: AssetImage(
-                                      'assets/images/Cloud.png',
-                                    ),
-                                    colorBlendMode: BlendMode.darken,
-                                    fit: BoxFit.cover,
-                                    // width: 100,
-                                  ),
+                                Text(
+                                  'AM',
+                                  style: TextStyle(
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .headline1!
+                                          .color,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w800,
+                                      fontFamily: 'SF Pro Display'),
                                 ),
-                                Image(
-                                  image: AssetImage(
-                                    'assets/images/Moon.png',
-                                  ),
-                                  width: 100,
-                                  fit: BoxFit.cover,
-                                  color: Colors.white,
-                                ),
-                                // Image(
-                                //   image: AssetImage(
-                                //     'assets/images/Sun.png',
-                                //   ),
-                                //   width: 100,
-                                //   fit: BoxFit.cover,
-                                // ),
                               ],
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  // const SizedBox(
-                  //   height: 15,
-                  // ),
-                  // End of top part =================================
-                  // Bottom part ========================================
-                  Flexible(
-                    flex: 9,
-                    fit: FlexFit.tight,
-                    child: Container(
-                      width: width,
-                      color: Colors.redAccent.withOpacity(0.3),
-                      // color: Colors.transparent,
-                      child: ListView(
-                        children: [
-                          alarm_card.buildCard(),
-                          buildCard(),
-                          buildCard(),
-                          buildCard(),
-                          buildCard(),
-                          buildCard(),
-                          buildCard(),
-                          buildCard(),
+                          // const SizedBox(
+                          //   width: 20,
+                          // ),
+                          Expanded(
+                            flex: 15,
+                            child: SizedBox(
+                              // color: Colors.green,
+                              child: Stack(
+                                children: const [
+                                  Opacity(
+                                    opacity: 0.6,
+                                    child: Image(
+                                      // alignment: Alignment.centerRight,
+                                      image: AssetImage(
+                                        'assets/images/Cloud.png',
+                                      ),
+                                      colorBlendMode: BlendMode.darken,
+                                      // fit: BoxFit.cover,
+                                      width: 200,
+                                    ),
+                                  ),
+                                  // Image(
+                                  //   image: AssetImage(
+                                  //     'assets/images/Moon.png',
+                                  //   ),
+                                  //   width: 200,
+                                  //   // fit: BoxFit.cover,
+                                  //   color: Colors.white,
+                                  // ),
+                                  Image(
+                                    image: AssetImage(
+                                      'assets/images/Sun.png',
+                                    ),
+                                    width: 100,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                         ],
                       ),
-                    ),
+                    ],
+                  ),
+                  // End of top part =================================
+                  // Bottom part ========================================
+                  ListView(
+                    padding: EdgeInsets.zero,
+                    shrinkWrap: true,
+                    children: [
+                      buildCard(),
+                      buildCard(),
+                      buildCard(),
+                      buildCard(),
+                      buildCard(),
+                    ],
                   ),
                   // End of bottom part =================================
+                  Container(
+                      alignment: Alignment.center,
+                      width: 50,
+                      color: Colors.green,
+                      child: const IconButton(
+                          onPressed: null, icon: Icon(Icons.add))),
                 ],
               ),
             ),
@@ -199,5 +209,95 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
-  
+  Container buildCard() {
+    // (List<int> activeDays)
+    // activeDays.forEach((activeDay) {days.get(activeDay).isActive = true });
+    // HashMap<int, Days> days = HashMap();
+    // days.addAll({
+    //   1 : Days('M'),
+    //   2 : Days('T', isActive: true),
+    //   3 : Days('W'),
+    //   4 : Days('T'),
+    //   5 : Days('F'),
+    //   6 : Days('S'),
+    //   7: Days('S'),
+    // });
+
+    List<Days> days = [
+      Days('M'),
+      Days('T'),
+      Days('W'),
+      Days('T'),
+      Days('F'),
+      Days('S'),
+      Days('S'),
+    ];
+
+    bool isSwitched = false;
+
+    return Container(
+      margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+      padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+      width: double.infinity,
+      height: 60,
+      decoration: CustomTheme.cardGrad,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                children: [
+                  Text(
+                    '12:00',
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                  Text(
+                    'AM',
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(4, 0, 0, 0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  textBaseline: TextBaseline.alphabetic,
+                  children:
+                      days.map((e) => buildDay(e.title, e.isActive)).toList(),
+                ),
+              ),
+            ],
+          ),
+          Switch(
+            value: isSwitched,
+            onChanged: (value) {
+              setState(() {
+                isSwitched = value;
+                print(isSwitched);
+              });
+            },
+            activeTrackColor: Colors.lightGreenAccent,
+            activeColor: Colors.green,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Text buildDay(String title, bool isActive) {
+    return Text(
+      title,
+      style: TextStyle(
+          color: isActive
+              ? Colors.blue
+              : Theme.of(context).textTheme.headline1!.color,
+          fontSize: 13,
+          fontWeight: FontWeight.w800,
+          fontFamily: 'SF Pro Display'),
+    );
+  }
 }
