@@ -27,6 +27,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  blurrycontainer: ^1.0.2
   widget_mask: ^1.0.0+0
   curved_navigation_bar: ^1.0.3 #latest version
   animated_background: ^2.0.0

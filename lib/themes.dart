@@ -10,24 +10,52 @@ class CustomTheme with ChangeNotifier {
     _isDarkTheme = !_isDarkTheme;
     notifyListeners();
   }
-  
+
   static Decoration get cardGrad {
-    return const BoxDecoration(
-      backgroundBlendMode: BlendMode.screen,
+    return BoxDecoration(
+      // backgroundBlendMode: BlendMode.colorBurn,
+
       shape: BoxShape.rectangle,
-      borderRadius: BorderRadius.all(Radius.circular(32)),
-      // borderRadius: BorderRadius.only(
-      // topLeft: Radius.circular(32), bottomLeft: Radius.circular(32)),
+      borderRadius: const BorderRadius.all(Radius.circular(32)),
+
+      border: Border.all(color: Colors.white30, width: 3),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.yellow.shade900,
+          // blurRadius: 4,
+          offset: const Offset(-2, 3), // Shadow position
+        ),
+      ],
+      // color: Colors.transparent,
       gradient: LinearGradient(
+        colors: [
+          Colors.blue.shade900,
+          Colors.blue.shade100,
+        ],
+        stops: const [0, 1],
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        stops: [0.1, 0.4, 0.9],
-        colors: [
-          Color(0xFFDAE9F1),
-          Color(0xFF104066),
-          Color(0xFF463A4E),
-        ],
       ),
+      // gradient: LinearGradient(
+      //     begin: Alignment.topCenter,
+      //     end: Alignment.bottomCenter,
+      //     // stops: [0.1, 0.4, 0.9],
+      //     // colors: [
+      //     //   Color(0xFFDAE9F1),
+      //     //   Color(0xFF104066),
+      //     //   Color(0xFF463A4E),
+      //     // ],
+      //     //
+      //     //
+      //     //
+      //     stops: const [
+      //       0,
+      //       1
+      //     ],
+      //     colors: [
+      //       Colors.pink.shade100,
+      //       Colors.purple.shade900,
+      //     ]),
     );
   }
 

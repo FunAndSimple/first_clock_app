@@ -37,11 +37,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             child: Stack(
               children: [
                 Container(
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('assets/images/bgDark.png'),
-                        fit: BoxFit.cover),
-                  ),
+                  color: Colors.grey.shade900,
+                  // decoration: const BoxDecoration(
+                  //   image: DecorationImage(
+                  //       image: AssetImage('assets/images/bgDark.png'),
+                  //       fit: BoxFit.cover),
+                  // ),
                 ),
                 // Container(decoration: CustomTheme.bgLight),
                 Container(
@@ -209,7 +210,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
-  Container buildCard() {
+  Widget buildCard() {
     // (List<int> activeDays)
     // activeDays.forEach((activeDay) {days.get(activeDay).isActive = true });
     // HashMap<int, Days> days = HashMap();
@@ -235,55 +236,61 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
     bool isSwitched = false;
 
-    return Container(
-      margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
-      padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
-      width: double.infinity,
-      height: 60,
-      decoration: CustomTheme.cardGrad,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
-                children: [
-                  Text(
-                    '12:00',
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
-                  Text(
-                    'AM',
-                    style: Theme.of(context).textTheme.bodyText2,
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(4, 0, 0, 0),
-                child: Row(
+    return Material(
+      elevation: 8,
+      color: Colors.transparent,
+      child: Container(
+        margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+        padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+        width: double.infinity,
+        height: 60,
+        // color:
+
+        decoration: CustomTheme.cardGrad,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
                   crossAxisAlignment: CrossAxisAlignment.baseline,
                   textBaseline: TextBaseline.alphabetic,
-                  children:
-                      days.map((e) => buildDay(e.title, e.isActive)).toList(),
+                  children: [
+                    Text(
+                      '12:00',
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                    Text(
+                      'AM',
+                      style: Theme.of(context).textTheme.bodyText2,
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-          Switch(
-            value: isSwitched,
-            onChanged: (value) {
-              setState(() {
-                isSwitched = value;
-                print(isSwitched);
-              });
-            },
-            activeTrackColor: Colors.lightGreenAccent,
-            activeColor: Colors.green,
-          ),
-        ],
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(4, 0, 0, 0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children:
+                        days.map((e) => buildDay(e.title, e.isActive)).toList(),
+                  ),
+                ),
+              ],
+            ),
+            Switch(
+              value: isSwitched,
+              onChanged: (value) {
+                setState(() {
+                  isSwitched = value;
+                  print(isSwitched);
+                });
+              },
+              activeTrackColor: Colors.lightGreenAccent,
+              activeColor: Colors.green,
+            ),
+          ],
+        ),
       ),
     );
   }
