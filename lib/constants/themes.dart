@@ -16,26 +16,26 @@ class CustomTheme with ChangeNotifier {
       // backgroundBlendMode: BlendMode.colorBurn,
 
       shape: BoxShape.rectangle,
-      borderRadius: const BorderRadius.all(Radius.circular(32)),
+      borderRadius: const BorderRadius.all(Radius.circular(12)),
 
       border: Border.all(color: Colors.white30, width: 3),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.yellow.shade900,
-          // blurRadius: 4,
-          offset: const Offset(-2, 3), // Shadow position
-        ),
-      ],
-      // color: Colors.transparent,
-      gradient: LinearGradient(
-        colors: [
-          Colors.blue.shade900,
-          Colors.blue.shade100,
-        ],
-        stops: const [0, 1],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-      ),
+      // boxShadow: [
+      //   BoxShadow(
+      //     color: Colors.yellow.shade900,
+      //     // blurRadius: 4,
+      //     offset: const Offset(-2, 3), // Shadow position
+      //   ),
+      // ],
+      color: Colors.transparent,
+      // gradient: LinearGradient(
+      //   colors: [
+      //     Colors.blue.shade900,
+      //     Colors.blue.shade100,
+      //   ],
+      //   stops: const [0, 1],
+      //   begin: Alignment.topCenter,
+      //   end: Alignment.bottomCenter,
+
       // gradient: LinearGradient(
       //     begin: Alignment.topCenter,
       //     end: Alignment.bottomCenter,

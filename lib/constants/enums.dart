@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class Days {
+class Day {
   final String title;
   // Color color;
   bool isActive;
 
-  Days(this.title, {this.isActive = false});
+  Day(this.title, {this.isActive = false});
 }
